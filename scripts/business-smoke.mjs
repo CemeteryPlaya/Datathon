@@ -1,0 +1,52 @@
+// Technical rehearsal using isolated synthetic data; uses a stub model, no model service needed.
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import assert from 'node:assert/strict';
+const { default: playwright } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'cqa-business-'));
+process.env.STORAGE_DIR = dir;
+process.env.DATA_DIR = dir;
+process.env.NODE_ENV = 'test';
+const { default: app } = await import('../server/index.js');
+const store = await import('../server/store.js');
+const { computeScore } = await import('../server/scoring.js');
+const checklist = store.getChecklist('default');
+const results = checklist.criteria.map(c => ({criterion_id:c.id, answer:c.type==='scale'?Math.max(...c.levels.map(l=>l.value)):c.kind==='gross'?'yes':'no', explanation:'Пример для технической репетиции', evidence:[0]}));
+const evaluation = store.saveEvaluation({conversation_id:'rehearsal',group_id:'DEV',language:'RU',channel:'agent chat',checklist_id:checklist.id,checklist_version:checklist.version,operator_name:'Демо',results,score:computeScore(checklist,results),cost_usd:0.02});
+fs.writeFileSync(path.join(dir,'DEV.json'), JSON.stringify([{conversation_id:'rehearsal',language:'RU',channel:'agent chat',transcript:[{timestamp:'00:01',speaker:'operator',text:'Пример для технической репетиции'}]}]));
+const server=app.listen(0);await new Promise(r=>server.once('listening',r));
+let browser;
+const started=Date.now();
+try {
+  browser=await playwright.chromium.launch({headless:true,...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),args:['--no-sandbox']});
+  const page=await browser.newPage({viewport:{width:1280,height:900}});
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  const base=`http://127.0.0.1:${server.address().port}`;
+  await page.goto(base+'/#/dashboard');
+  await page.getByRole('heading',{name:'Экономия',exact:true}).waitFor();
+  assert.ok((await page.locator('#saved-hours').textContent()).includes('0,13'));
+  await page.getByText('Допущения и формула расчёта',{exact:true}).click();
+  await page.locator('[name=human_minutes]').fill('20');
+  await page.getByRole('button',{name:'Пересчитать экономию'}).click();
+  await page.waitForFunction(()=>document.querySelector('#saved-hours')?.textContent.includes('0,3'));
+  await page.locator('.cqa-economy').screenshot({path:path.join(os.tmpdir(),'cqa-economy.png')});
+  await page.goto(base+'/#/operators/'+encodeURIComponent('Демо'));
+  await page.getByRole('heading',{name:'Коучинг: план улучшения'}).waitFor();
+  assert.ok((await page.locator('.cqa-coaching-item').first().textContent()).includes('Грубые ошибки'));
+  assert.ok(await page.getByText(/следующих 5 применимых диалогах/).count());
+  await page.locator('[aria-labelledby=coaching-title]').screenshot({path:path.join(os.tmpdir(),'cqa-coaching.png')});
+  await page.getByRole('link',{name:/Разобрать rehearsal/}).first().click();
+  await page.locator('#msg-0.cqa-highlight').waitFor();
+  // Unknown cost must hide savings; a resolved appeal must remove the risk and coaching priority.
+  store.saveEvaluation({...evaluation,id:'new',created_at:'2099-01-01T00:00:00Z',cost_usd:null});
+  await page.goto(base+'/#/dashboard');
+  await page.getByText(/Стоимость не указана для 1 оценок/).waitFor();
+  assert.equal(await page.locator('#saved-cost').textContent(),'не рассчитана');
+  store.saveAppeal({id:'resolved',evaluation_id:'new',criterion_id:'c08',status:'resolved',decision:{action:'change',new_answer:'no',reason:'Исправлено при разборе'}});
+  await page.goto(base+'/#/operators/'+encodeURIComponent('Демо'));
+  await page.getByRole('heading',{name:'Коучинг: план улучшения'}).waitFor();
+  assert.equal(await page.locator('.cqa-coaching-item').getByText('риск',{exact:true}).count(),0);
+  assert.deepEqual(errors,[]);
+  console.log(`PASS: economy → assumptions → coaching → evidence → unknown price → appeal; ${((Date.now()-started)/1000).toFixed(1)} s (automated, synthetic data)`);
+} finally {await browser?.close();server.close();fs.rmSync(dir,{recursive:true,force:true});}

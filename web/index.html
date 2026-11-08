@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CQA — качество диалогов</title>
+  <script>try{var t=localStorage.getItem('cqa-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/theme-freedom.css">
+  <link rel="icon" href="img/dialogs.webp">
+</head>
+<body class="cqa">
+  <header class="cqa-header">
+    <a class="cqa-logo" href="#/dashboard"><img src="img/dialogs.webp" alt="">CQA</a>
+    <nav class="cqa-nav" id="cqa-nav">
+      <a href="#/dashboard"><img class="cqa-nav-ic" src="img/dashboard.webp" alt="">Сводка</a>
+      <a href="#/list"><img class="cqa-nav-ic" src="img/dialogs.webp" alt="">Диалоги</a>
+      <a href="#/operators"><img class="cqa-nav-ic" src="img/operators.webp" alt="">Операторы</a>
+      <a href="#/alerts"><img class="cqa-nav-ic" src="img/alerts.webp" alt="">Тревоги <span class="cqa-badge" id="cqa-alert-count" hidden></span></a>
+      <a href="#/appeals"><img class="cqa-nav-ic" src="img/appeals.webp" alt="">Апелляции</a>
+      <a href="#/checklists"><img class="cqa-nav-ic" src="img/checklists.webp" alt="">Чек-листы</a>
+    </nav>
+    <div id="cqa-role-switch"></div>
+  </header>
+  <main class="cqa-main" id="cqa-app"></main>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

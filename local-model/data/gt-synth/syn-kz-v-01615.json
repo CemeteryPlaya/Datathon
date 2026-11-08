@@ -1,0 +1,18 @@
+{
+ "conversation_id": "syn-kz-v-01615",
+ "answers": {
+  "c01": "no",
+  "c02": "na",
+  "c03": "na",
+  "c04": 20,
+  "c05": "no",
+  "c06": 10,
+  "c07": "yes",
+  "c08": "no"
+ },
+ "ambiguous": [
+  "c06"
+ ],
+ "note": "",
+ "labeled_by": "generator"
+}

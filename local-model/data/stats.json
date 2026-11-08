@@ -1,0 +1,139 @@
+{
+ "dialogs": 8000,
+ "pairs": {
+  "train": 88836,
+  "val": 11809,
+  "test": 11263,
+  "zero_shot": 2415
+ },
+ "by_language": {
+  "RU": 4026,
+  "EN": 1972,
+  "KZ": 2002
+ },
+ "by_channel": {
+  "agent chat": 7207,
+  "voice call": 793
+ },
+ "by_split": {
+  "train": 6351,
+  "val": 844,
+  "test": 805
+ },
+ "by_topic": {
+  "tariff_change": 471,
+  "deposit_how": 439,
+  "bonds_find": 447,
+  "dividends_when": 455,
+  "account_open": 428,
+  "tariff_where": 446,
+  "report_request": 456,
+  "balance_check": 462,
+  "currency_exchange": 439,
+  "securities_transfer": 428,
+  "order_rejected": 446,
+  "margin_enable": 436,
+  "withdrawal_status": 468,
+  "login_problem": 427,
+  "app_crash": 418,
+  "trade_fee": 478,
+  "personal_data_update": 441,
+  "tax_certificate": 415
+ },
+ "turns": {
+  "min": 9,
+  "max": 33,
+  "mean": 16.1
+ },
+ "answers": {
+  "c01": {
+   "yes": 6158,
+   "no": 1842
+  },
+  "c02": {
+   "na": 5654,
+   "yes": 1343,
+   "no": 1003
+  },
+  "c03": {
+   "yes": 1839,
+   "na": 5430,
+   "no": 731
+  },
+  "c04": {
+   "20": 3635,
+   "5": 770,
+   "10": 1271,
+   "15": 1137,
+   "0": 793,
+   "na": 394
+  },
+  "c05": {
+   "yes": 6302,
+   "no": 1698
+  },
+  "c06": {
+   "10": 6304,
+   "7": 1002,
+   "4": 467,
+   "0": 227
+  },
+  "c07": {
+   "yes": 3402,
+   "no": 3227,
+   "na": 1371
+  },
+  "c08": {
+   "no": 6883,
+   "yes": 1117
+  }
+ },
+ "facts_true": {
+  "chat_disconnected": 1371,
+  "client_asked_followup": 2222,
+  "client_caps": 373,
+  "client_complained": 2129,
+  "client_emoji": 393,
+  "client_formulated_request": 7606,
+  "client_had_to_repeat": 467,
+  "client_sneezed": 386,
+  "explicit_wait": 1315,
+  "gross_confidential": 359,
+  "gross_insult": 342,
+  "gross_paid_bypass": 416,
+  "identity_required": 2570,
+  "identity_verified": 2204,
+  "needed_clarification": 1977,
+  "op_answered_followup": 1085,
+  "op_apologized": 355,
+  "op_asked_clarification": 1343,
+  "op_blamed_client": 357,
+  "op_callback_promise": 337,
+  "op_caps": 322,
+  "op_closed_silently": 545,
+  "op_code_switch": 343,
+  "op_competitor": 443,
+  "op_coughed": 339,
+  "op_eating": 292,
+  "op_emoji": 389,
+  "op_greeted": 6775,
+  "op_greeting_wrong_language": 340,
+  "op_incoherent": 227,
+  "op_informal_ty": 365,
+  "op_introduced": 6736,
+  "op_link": 382,
+  "op_personal_talk": 334,
+  "op_rate_request": 354,
+  "op_reacted_to_complaint": 1322,
+  "op_reasked_known": 404,
+  "op_rude": 314,
+  "op_said_goodbye": 4733,
+  "op_slang": 390,
+  "op_sneezed": 377,
+  "op_summary_or_offer": 3814,
+  "op_typos": 246,
+  "op_warned_wait": 882,
+  "protected_disclosed": 1837
+ },
+ "majority_baseline_pct": 68.4
+}

@@ -1,0 +1,18 @@
+{
+  "conversation_id": "p1-ru-029",
+  "answers": {
+    "c01": "yes",
+    "c02": "na",
+    "c03": "na",
+    "c04": 20,
+    "c05": "no",
+    "c06": 7,
+    "c07": "no",
+    "c08": "yes"
+  },
+  "ambiguous": [
+    "c06"
+  ],
+  "note": "Оскорбление «Вы вообще читать умеете?».",
+  "labeled_by": "draft-ai"
+}

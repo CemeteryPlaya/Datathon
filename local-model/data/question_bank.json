@@ -1,0 +1,1040 @@
+{
+ "checklist": {
+  "id": "default",
+  "version": 1
+ },
+ "questions": [
+  {
+   "qid": "crit_c01",
+   "kind": "criterion",
+   "source": "c01",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Установление контакта",
+     "description": "Оператор в первом своём ответе поздоровался на языке клиента и представился.",
+     "type": "yesno",
+     "na_allowed": false,
+     "na_condition": "",
+     "polarity": "positive"
+    },
+    {
+     "name": "Приветствие и представление",
+     "description": "Да — в первой реплике оператор поздоровался на языке клиента и назвал своё имя.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    },
+    {
+     "name": "Greeting",
+     "description": "Yes — in the first reply the agent greeted the customer in the customer's language and introduced themselves.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "crit_c02",
+   "kind": "criterion",
+   "source": "c02",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Выявление потребности",
+     "description": "Да — оператор учёл уже известные детали и уточнил недостающее до того, как дать ответ. Нет — оператор ответил, не уточнив то, без чего ответ вышел неточным или неполным, или переспросил то, что клиент уже назвал. Здесь оценивается только выяснение запроса; полнота ответа оценивается в консультации.",
+     "type": "yesno",
+     "na_allowed": true,
+     "na_condition": "Данных для ответа хватало с самого начала: оператор смог ответить по существу без уточняющих вопросов.",
+     "polarity": "positive"
+    },
+    {
+     "name": "Уточнение запроса",
+     "description": "Да — прежде чем ответить, оператор выяснил недостающие детали и не переспрашивал уже известное.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": true,
+     "na_condition": "Сведений от клиента сразу хватало для ответа."
+    },
+    {
+     "name": "Clarifying the need",
+     "description": "Yes — the agent asked for missing details before answering and did not re-ask what the customer already said.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": true,
+     "na_condition": "The customer's first message already had everything needed."
+    }
+   ]
+  },
+  {
+   "qid": "crit_c03",
+   "kind": "criterion",
+   "source": "c03",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Идентификация",
+     "description": "Идентификация клиента подтверждена до раскрытия данных или выполнения защищённого действия.",
+     "type": "yesno",
+     "na_allowed": true,
+     "na_condition": "Запрос не требовал идентификации (например, общий вопрос о тарифах).",
+     "polarity": "positive"
+    },
+    {
+     "name": "Проверка личности",
+     "description": "Да — личность клиента подтверждена ДО того, как оператор раскрыл данные счёта или выполнил защищённое действие.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": true,
+     "na_condition": "Запрос не касался данных счёта и защищённых действий."
+    },
+    {
+     "name": "Identity check",
+     "description": "Yes — the customer's identity was verified before any account data was disclosed or protected action taken.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": true,
+     "na_condition": "The request did not need identification."
+    }
+   ]
+  },
+  {
+   "qid": "crit_c04",
+   "kind": "criterion",
+   "source": "c04",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Корректная и полная консультация",
+     "description": "Насколько корректно и полно оператор решил запрос клиента.",
+     "type": "scale",
+     "na_allowed": true,
+     "na_condition": "Чат завершился до того, как клиент сформулировал запрос.",
+     "polarity": "positive",
+     "levels": [
+      {
+       "value": 0,
+       "description": "Ответа по существу нет или ключевая рекомендация ошибочна."
+      },
+      {
+       "value": 5,
+       "description": "Есть общая подсказка, но клиенту всё ещё непонятно, как действовать."
+      },
+      {
+       "value": 10,
+       "description": "Часть запроса закрыта, существенный вопрос остался открытым."
+      },
+      {
+       "value": 15,
+       "description": "Основной вопрос решён, пропущена второстепенная деталь."
+      },
+      {
+       "value": 20,
+       "description": "Все существенные вопросы закрыты или дан корректный следующий шаг."
+      }
+     ]
+    },
+    {
+     "name": "Качество консультации",
+     "description": "Насколько полно и правильно оператор решил вопрос клиента.",
+     "type": "scale",
+     "polarity": "positive",
+     "na_allowed": true,
+     "na_condition": "Клиент так и не сформулировал запрос.",
+     "levels": [
+      {
+       "value": 0,
+       "description": "Ответа нет или он ошибочный."
+      },
+      {
+       "value": 5,
+       "description": "Общая подсказка, клиенту непонятно, что делать."
+      },
+      {
+       "value": 10,
+       "description": "Закрыта часть запроса."
+      },
+      {
+       "value": 15,
+       "description": "Главное решено, упущена мелочь."
+      },
+      {
+       "value": 20,
+       "description": "Всё закрыто или дан правильный следующий шаг."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "qid": "crit_c05",
+   "kind": "criterion",
+   "source": "c05",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Эмпатия",
+     "description": "Оператор вежлив; если клиент выражал недовольство или испытывал неудобство, оператор отреагировал на его конкретную проблему.",
+     "type": "yesno",
+     "na_allowed": false,
+     "na_condition": "",
+     "polarity": "positive"
+    },
+    {
+     "name": "Вежливость и эмпатия",
+     "description": "Да — оператор вежлив и, если клиент жаловался, отреагировал именно на его проблему.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    },
+    {
+     "name": "Empathy",
+     "description": "Yes — the agent was polite and, if the customer complained, responded to their specific problem.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "crit_c06",
+   "kind": "criterion",
+   "source": "c06",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Управление диалогом, скорость, грамотность",
+     "description": "Оцените ясность, порядок ответов и предупреждение об ожидании. Явное ожидание — оператор уходит проверять информацию или ставит клиента на удержание; обычная пауза между сообщениями ожиданием не считается. Уточняющий вопрос клиента о следующем шаге — нормальное продолжение, сбоем не считается. Ступень 4 — клиенту пришлось повторить тот же вопрос, потому что ответ оператора был непонятным, невпопад или проигнорировал вопрос. Если оператор один раз переспросил уже сказанное клиентом — это один заметный сбой (7).",
+     "type": "scale",
+     "na_allowed": false,
+     "na_condition": "",
+     "polarity": "positive",
+     "levels": [
+      {
+       "value": 0,
+       "description": "Из-за бессвязных или противоречивых реплик ход диалога непонятен."
+      },
+      {
+       "value": 4,
+       "description": "Клиенту приходится переспрашивать из-за формулировок или порядка ответов."
+      },
+      {
+       "value": 7,
+       "description": "Один заметный сбой, но клиент может понять ответ и продолжить."
+      },
+      {
+       "value": 10,
+       "description": "Ответы ясные и связные. Если было явное ожидание, оператор предупредил."
+      }
+     ]
+    },
+    {
+     "name": "Ясность и ведение диалога",
+     "description": "Понятность ответов, их порядок и предупреждение, если клиенту пришлось ждать.",
+     "type": "scale",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": "",
+     "levels": [
+      {
+       "value": 0,
+       "description": "Реплики бессвязны или противоречат друг другу."
+      },
+      {
+       "value": 4,
+       "description": "Клиенту пришлось переспрашивать."
+      },
+      {
+       "value": 7,
+       "description": "Один заметный сбой."
+      },
+      {
+       "value": 10,
+       "description": "Всё ясно; об ожидании предупредил."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "qid": "crit_c07",
+   "kind": "criterion",
+   "source": "c07",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Завершение",
+     "description": "Да — оператор подвёл итог (что сделано или что будет дальше) или предложил дальнейшую помощь, и попрощался. Одного прощания или вежливой формулы («Пожалуйста», «Отлично», «Рад помочь», «Спасибо за обращение», «You're welcome», «Thanks for contacting us») недостаточно.",
+     "type": "yesno",
+     "na_allowed": true,
+     "na_condition": "Чат оборвался (клиент ушёл, соединение прервано).",
+     "polarity": "positive"
+    },
+    {
+     "name": "Корректное завершение",
+     "description": "Да — в конце оператор подвёл итог или предложил помощь и попрощался. Одно «пожалуйста» или «до свидания» не засчитывается.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": true,
+     "na_condition": "Клиент ушёл или связь оборвалась до того, как можно было завершить."
+    },
+    {
+     "name": "Closing",
+     "description": "Yes — the agent summarised or offered further help and said goodbye. A bare 'you're welcome' or 'bye' is not enough.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": true,
+     "na_condition": "The chat was cut off before it could be closed."
+    }
+   ]
+  },
+  {
+   "qid": "crit_c08",
+   "kind": "criterion",
+   "source": "c08",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Грубые ошибки",
+     "description": "Оскорбление; предложение платной услуги в обход компании (перевести деньги лично, личный номер для платной консультации — достаточно самого предложения); раскрытие конфиденциальной информации. Маскирование ПД в транскрипте раскрытием не считается. «Да» = нарушение было.",
+     "type": "yesno",
+     "na_allowed": false,
+     "na_condition": "",
+     "polarity": "negative"
+    },
+    {
+     "name": "Грубое нарушение",
+     "description": "Да — оскорбление клиента, предложение платных услуг в обход компании или раскрытие конфиденциальной информации.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    },
+    {
+     "name": "Critical violation",
+     "description": "Yes — insulting the customer, offering paid services bypassing the company, or disclosing confidential information.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_op_greeted",
+   "kind": "atomic",
+   "source": "op_greeted",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Оператор поздоровался",
+     "description": "Да — в первой своей реплике оператор поздоровался с клиентом на его языке.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    },
+    {
+     "name": "Agent greeted",
+     "description": "Yes — the agent's first message contains a greeting in the customer's language.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_op_introduced",
+   "kind": "atomic",
+   "source": "op_introduced",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Оператор назвал имя",
+     "description": "Да — в первой реплике оператор представился (назвал имя, в т.ч. скрытое как [Имя скрыто]).",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    },
+    {
+     "name": "Операторға аты",
+     "description": "Иә — оператор бірінші репликасында атын айтты.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_op_greeting_wrong_language",
+   "kind": "atomic",
+   "source": "op_greeting_wrong_language",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Приветствие не на языке клиента",
+     "description": "Да — оператор поздоровался не на том языке, на котором пишет клиент.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_client_formulated_request",
+   "kind": "atomic",
+   "source": "client_formulated_request",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Клиент сформулировал запрос",
+     "description": "Да — клиент описал, что ему нужно (а не только попросил оператора).",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_needed_clarification",
+   "kind": "atomic",
+   "source": "needed_clarification",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Не хватало деталей",
+     "description": "Да — по первому сообщению клиента не хватало сведений, чтобы точно ответить.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_op_asked_clarification",
+   "kind": "atomic",
+   "source": "op_asked_clarification",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Оператор задал уточняющий вопрос",
+     "description": "Да — оператор спросил у клиента недостающие детали до ответа.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_op_reasked_known",
+   "kind": "atomic",
+   "source": "op_reasked_known",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Переспросил известное",
+     "description": "Да — оператор спросил то, что клиент уже сообщил.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_identity_required",
+   "kind": "atomic",
+   "source": "identity_required",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Нужна идентификация",
+     "description": "Да — запрос касается данных конкретного счёта или защищённого действия.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_identity_verified",
+   "kind": "atomic",
+   "source": "identity_verified",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Личность подтверждена",
+     "description": "Да — в диалоге есть подтверждение личности клиента (системное сообщение или подтверждение оператора).",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_protected_disclosed",
+   "kind": "atomic",
+   "source": "protected_disclosed",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Раскрыты данные счёта",
+     "description": "Да — оператор сообщил данные счёта клиента или выполнил защищённое действие.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_client_asked_followup",
+   "kind": "atomic",
+   "source": "client_asked_followup",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Был дополнительный вопрос",
+     "description": "Да — после ответа клиент задал ещё один вопрос.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_op_answered_followup",
+   "kind": "atomic",
+   "source": "op_answered_followup",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Ответил на дополнительный вопрос",
+     "description": "Да — оператор ответил на дополнительный вопрос клиента.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": true,
+     "na_condition": "Дополнительного вопроса не было."
+    }
+   ]
+  },
+  {
+   "qid": "a_client_complained",
+   "kind": "atomic",
+   "source": "client_complained",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Клиент выразил недовольство",
+     "description": "Да — клиент жаловался или описывал неудобство.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_op_reacted_to_complaint",
+   "kind": "atomic",
+   "source": "op_reacted_to_complaint",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Реакция на жалобу",
+     "description": "Да — оператор отреагировал на конкретную жалобу клиента.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": true,
+     "na_condition": "Клиент не жаловался."
+    }
+   ]
+  },
+  {
+   "qid": "a_op_rude",
+   "kind": "atomic",
+   "source": "op_rude",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Грубый тон",
+     "description": "Да — оператор отвечал пренебрежительно или резко.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_explicit_wait",
+   "kind": "atomic",
+   "source": "explicit_wait",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Клиент ждал",
+     "description": "Да — оператор уходил проверять информацию или ставил клиента на удержание.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_op_warned_wait",
+   "kind": "atomic",
+   "source": "op_warned_wait",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Предупредил об ожидании",
+     "description": "Да — перед ожиданием оператор предупредил клиента.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": true,
+     "na_condition": "Ожидания не было."
+    }
+   ]
+  },
+  {
+   "qid": "a_client_had_to_repeat",
+   "kind": "atomic",
+   "source": "client_had_to_repeat",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Клиент повторил вопрос",
+     "description": "Да — клиенту пришлось повторить вопрос, потому что оператор ответил невпопад.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_op_incoherent",
+   "kind": "atomic",
+   "source": "op_incoherent",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Противоречивые ответы",
+     "description": "Да — реплики оператора бессвязны или противоречат друг другу.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_op_summary_or_offer",
+   "kind": "atomic",
+   "source": "op_summary_or_offer",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Итог или предложение помощи",
+     "description": "Да — в конце оператор подвёл итог или предложил дальнейшую помощь.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_op_said_goodbye",
+   "kind": "atomic",
+   "source": "op_said_goodbye",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Оператор попрощался",
+     "description": "Да — оператор попрощался с клиентом.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_chat_disconnected",
+   "kind": "atomic",
+   "source": "chat_disconnected",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Обрыв",
+     "description": "Да — клиент ушёл или связь прервалась.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_op_closed_silently",
+   "kind": "atomic",
+   "source": "op_closed_silently",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Закрыл чат молча",
+     "description": "Да — оператор закрыл чат без прощания.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_gross_insult",
+   "kind": "atomic",
+   "source": "gross_insult",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Оскорбление клиента",
+     "description": "Да — оператор оскорбил клиента.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_gross_paid_bypass",
+   "kind": "atomic",
+   "source": "gross_paid_bypass",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Платные услуги в обход компании",
+     "description": "Да — оператор предложил свои платные услуги мимо компании.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "a_gross_confidential",
+   "kind": "atomic",
+   "source": "gross_confidential",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Раскрытие конфиденциального",
+     "description": "Да — оператор раскрыл чужие данные или внутреннюю информацию компании.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_sneezed",
+   "kind": "novel",
+   "source": "op_sneezed",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Штраф за чихание",
+     "description": "Да — оператор чихнул в чат с клиентом (например, «апчхи»). Чих клиента не учитывается.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    },
+    {
+     "name": "Плохо, если оператор чихнул",
+     "description": "Да = нарушение: в репликах оператора есть чихание.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    },
+    {
+     "name": "Sneezing penalty",
+     "description": "Yes — the agent sneezed in the chat ('achoo'). The customer sneezing does not count.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_coughed",
+   "kind": "novel",
+   "source": "op_coughed",
+   "split": "zero_shot",
+   "wordings": [
+    {
+     "name": "Кашель в чате",
+     "description": "Да — оператор написал, что кашляет («кхе-кхе», *кашляет*).",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_eating",
+   "kind": "novel",
+   "source": "op_eating",
+   "split": "zero_shot",
+   "wordings": [
+    {
+     "name": "Еда на рабочем месте",
+     "description": "Да — оператор сообщил клиенту, что ест или обедает во время диалога.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_competitor",
+   "kind": "novel",
+   "source": "op_competitor",
+   "split": "zero_shot",
+   "wordings": [
+    {
+     "name": "Упоминание конкурентов",
+     "description": "Да — оператор хвалил или упоминал другую компанию-конкурента.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_emoji",
+   "kind": "novel",
+   "source": "op_emoji",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Эмодзи в ответах",
+     "description": "Да — оператор использовал эмодзи.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    },
+    {
+     "name": "Emoji usage",
+     "description": "Yes — the agent used emoji in their messages.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_slang",
+   "kind": "novel",
+   "source": "op_slang",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Сленг и жаргон",
+     "description": "Да — оператор писал на сленге или неформально («короче», «ща»).",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_informal_ty",
+   "kind": "novel",
+   "source": "op_informal_ty",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Обращение на «ты»",
+     "description": "Да — оператор обратился к клиенту на «ты» (или фамильярно).",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_rate_request",
+   "kind": "novel",
+   "source": "op_rate_request",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Просьба об оценке",
+     "description": "Да — оператор попросил клиента оценить его работу.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_link",
+   "kind": "novel",
+   "source": "op_link",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Ссылка на инструкцию",
+     "description": "Да — оператор отправил клиенту ссылку.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_personal_talk",
+   "kind": "novel",
+   "source": "op_personal_talk",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Личные темы",
+     "description": "Да — оператор рассказывал о себе и личных делах.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_callback_promise",
+   "kind": "novel",
+   "source": "op_callback_promise",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Обещание перезвонить",
+     "description": "Да — оператор пообещал, что клиенту перезвонят или свяжутся позже.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_apologized",
+   "kind": "novel",
+   "source": "op_apologized",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Извинение",
+     "description": "Да — оператор извинился перед клиентом за ожидание или неудобства.",
+     "type": "yesno",
+     "polarity": "positive",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_code_switch",
+   "kind": "novel",
+   "source": "op_code_switch",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Смешение языков",
+     "description": "Да — оператор смешивал языки в одной реплике.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_blamed_client",
+   "kind": "novel",
+   "source": "op_blamed_client",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Обвинение клиента",
+     "description": "Да — оператор обвинил клиента в проблеме.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_caps",
+   "kind": "novel",
+   "source": "op_caps",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Капс",
+     "description": "Да — оператор писал заглавными буквами (крик).",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  },
+  {
+   "qid": "n_op_typos",
+   "kind": "novel",
+   "source": "op_typos",
+   "split": "train",
+   "wordings": [
+    {
+     "name": "Много опечаток",
+     "description": "Да — в реплике оператора много опечаток.",
+     "type": "yesno",
+     "polarity": "negative",
+     "na_allowed": false,
+     "na_condition": ""
+    }
+   ]
+  }
+ ]
+}

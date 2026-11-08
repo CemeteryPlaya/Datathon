@@ -1,0 +1,18 @@
+{
+  "conversation_id": "p1-ru-020",
+  "answers": {
+    "c01": "yes",
+    "c02": "na",
+    "c03": "na",
+    "c04": 20,
+    "c05": "yes",
+    "c06": 10,
+    "c07": "no",
+    "c08": "no"
+  },
+  "ambiguous": [
+    "c04"
+  ],
+  "note": "",
+  "labeled_by": "draft-ai"
+}

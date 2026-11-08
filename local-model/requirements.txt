@@ -1,0 +1,11 @@
+# Локальная модель CQA. Python 3.10+.
+# CPU-сборка torch (рекомендуется, ~200 МБ вместо ~2.5 ГБ):
+#   py -3 -m venv local-model\.venv
+#   local-model\.venv\Scripts\activate
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+#   pip install -r local-model\requirements.txt
+# Проверено на: torch 2.15.0+cpu, numpy 2.5.4, fastapi 0.162.2, uvicorn 0.54.0, Python 3.14 (Windows 11).
+torch>=2.4,<3
+numpy>=1.26,<3
+fastapi>=0.110,<1
+uvicorn>=0.29,<1

@@ -1,0 +1,16 @@
+{
+ "conversation_id": "syn-ru-c-05478",
+ "answers": {
+  "c01": "yes",
+  "c02": "na",
+  "c03": "na",
+  "c04": 5,
+  "c05": "no",
+  "c06": 10,
+  "c07": "no",
+  "c08": "no"
+ },
+ "ambiguous": [],
+ "note": "",
+ "labeled_by": "generator"
+}
